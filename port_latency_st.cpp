@@ -52,6 +52,11 @@ int client(int nframes)
         Time::delay(0.5);
     }
 
+    if (nframes == 0)
+    {
+        nframes = 10E12;
+    }
+
     while(count<nframes)
         {
             Bottle datum;
