@@ -22,10 +22,11 @@ int server(double server_wait)
         printf("Sending frame %d\n", k);
         Bottle b;
         port.read(b);
-        Time::delay(server_wait);
+        
         port.write(b);
         printf("Done\n");
         //give the CPU some time
+        Time::delay(server_wait);
         k++;
     }
     port.close();
@@ -54,7 +55,7 @@ int client(int nframes)
 
     if (nframes == 0)
     {
-        nframes = 10E12;
+        nframes = 2147483647;
     }
 
     while(count<nframes)
