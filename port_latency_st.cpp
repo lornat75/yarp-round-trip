@@ -22,7 +22,9 @@ int server(double server_wait)
         printf("Sending frame %d\n", k);
         Bottle b;
         port.read(b);
+        Time::delay(server_wait);
         port.write(b);
+        printf("Done\n");
         //give the CPU some time
         k++;
     }
@@ -43,6 +45,12 @@ int client(int nframes)
             fprintf(stderr, "Waiting for connection\n");
             Time::delay(0.5);
         }
+
+    while (!Network::connect("/profiling/port2", "/profiling/port"))
+    {
+        fprintf(stderr, "Waiting for connection\n");
+        Time::delay(0.5);
+    }
 
     while(count<nframes)
         {
